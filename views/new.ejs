@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add New User</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+    }
+
+    .form-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+      font-size: 2em;
+      font-weight: 300;
+    }
+
+    .form-subtitle {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #7f8c8d;
+      font-size: 1.1em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group label {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #7f8c8d;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 18px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+
+    input:focus + label,
+    input:not(:placeholder-shown) + label {
+      top: -8px;
+      left: 12px;
+      font-size: 0.8em;
+      color: #3498db;
+      background: white;
+      padding: 0 8px;
+    }
+
+    input::placeholder {
+      color: transparent;
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #bdc3c7;
+      font-size: 1.2em;
+    }
+
+    button {
+      padding: 18px;
+      background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(52, 152, 219, 0.6);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .back-link a:hover {
+      color: #2980b9;
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 30px 20px;
+        margin: 20px;
+      }
+      
+      .form-title {
+        font-size: 1.8em;
+      }
+      
+      input {
+        padding: 15px;
+      }
+      
+      button {
+        padding: 15px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1 class="form-title">Join Our Community</h1>
+    <p class="form-subtitle">Create your account to get started</p>
+    
+    <form action="/user/new" method="POST">
+      <div class="input-group">
+        <input name="email" type="email" placeholder="Enter email" required />
+        <label for="email">Email Address</label>
+        <span class="input-icon">📧</span>
+      </div>
+      
+      <div class="input-group">
+        <input name="username" type="text" placeholder="Enter username" required />
+        <label for="username">Username</label>
+        <span class="input-icon">👤</span>
+      </div>
+      
+      <div class="input-group">
+        <input name="password" type="password" placeholder="Enter password" required />
+        <label for="password">Password</label>
+        <span class="input-icon">🔒</span>
+      </div>
+      
+      <button type="submit">Create Account</button>
+    </form>
+    
+    <div class="back-link">
+      <a href="/">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

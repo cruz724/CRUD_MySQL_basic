@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit User</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .form-title {
+      font-size: 2.2em;
+      font-weight: 300;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .user-info {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border-left: 4px solid #3498db;
+    }
+
+    .user-info h3 {
+      color: #2c3e50;
+      font-size: 1.1em;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .current-email {
+      color: #3498db;
+      font-weight: 500;
+      font-size: 1.1em;
+    }
+
+    .edit-note {
+      color: #7f8c8d;
+      font-size: 0.95em;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    textarea,
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      resize: vertical;
+      min-height: 50px;
+    }
+
+    textarea {
+      min-height: 80px;
+      max-height: 120px;
+    }
+
+    textarea:focus,
+    input:focus {
+      outline: none;
+      border-color: #f39c12;
+      box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.1);
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #bdc3c7;
+      font-size: 1.2em;
+      pointer-events: none;
+    }
+
+    .input-help {
+      font-size: 0.85em;
+      color: #7f8c8d;
+      margin-top: 5px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+      color: white;
+      padding: 18px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(243, 156, 18, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(243, 156, 18, 0.6);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .cancel-btn {
+      background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(149, 165, 166, 0.4);
+      text-align: center;
+      flex: 1;
+    }
+
+    .cancel-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(149, 165, 166, 0.6);
+    }
+
+    .submit-btn {
+      flex: 2;
+    }
+
+    .warning {
+      background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+      border: 1px solid #f39c12;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+
+    .warning-icon {
+      margin-right: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+        margin: 20px;
+      }
+      
+      .form-title {
+        font-size: 1.8em;
+      }
+      
+      textarea,
+      input {
+        padding: 12px;
+      }
+      
+      button {
+        padding: 15px;
+        font-size: 1rem;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="form-title">Edit User Profile</h1>
+    </div>
+
+    <div class="user-info">
+      <h3>Current User Information</h3>
+      <div class="current-email">📧 <%= data.email %></div>
+      <div class="edit-note">You can edit the username and update the password below</div>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">⚠️</span>
+      <strong>Important:</strong> Please enter your password to confirm changes to your account.
+    </div>
+
+    <form method="post" action="/user/<%=data.id%>?_method=PATCH">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <textarea name="username" id="username" placeholder="Enter new username"><%= data.username %></textarea>
+        <div class="input-help">Choose a unique username that represents you</div>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Confirm Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password to confirm changes" required />
+        <span class="input-icon">🔒</span>
+        <div class="input-help">Enter your current password to save changes</div>
+      </div>
+
+      <div class="actions">
+        <a href="/users" class="cancel-btn">Cancel</a>
+        <button type="submit" class="submit-btn">Update Profile</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
