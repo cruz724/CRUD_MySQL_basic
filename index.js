@@ -1,3 +1,5 @@
+require("dotenv").config(); // <-- add this at the top
+
 const express = require("express");
 const app = express();
 const { faker } = require("@faker-js/faker");
@@ -7,7 +9,8 @@ const methodOverride = require("method-override");
 const { da } = require("@faker-js/faker");
 const { v4: uuidv4 } = require("uuid");
 
-let port = 8080;
+let port = process.env.PORT || 8080;
+
 
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
@@ -18,11 +21,12 @@ app.set("views", path.join(__dirname, "/views"));
 
 //-------------------MYSQL cnnection setup---------------------------
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "delta_app",
-  password: "Shu88900bham@",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
 });
+
 
 //--------------To Generate Fake Data---------------------------
 let getRandomUser = () => {
